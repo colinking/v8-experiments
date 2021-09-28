@@ -15,6 +15,18 @@ var code = `
 	})
 `
 
+// It's not an issue with calling JSON.stringify on this proxy, since
+// the following runs fine:
+//
+// var code = `
+// 	JSON.stringify(new Proxy({}, {
+// 		get: function () {
+// 			foobar()
+// 			return "hello!"
+// 		},
+// 	}))
+// `
+
 func main() {
 	iso := v8.NewIsolate()
 	defer iso.Dispose()
@@ -36,7 +48,7 @@ func main() {
 		panic(fmt.Errorf("running script: %w", err))
 	}
 
-	s, err := v8.JSONStringify(v8ctx, v8v)
+	s, err := v8.JSONStringify(nil, v8v)
 	if err != nil {
 		panic(fmt.Errorf("stringifying value: %w", err))
 	}
