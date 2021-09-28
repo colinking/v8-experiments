@@ -47,6 +47,14 @@ func main() {
 	iso := v8.NewIsolate()
 	defer iso.Dispose()
 
+	// You can uncomment this to capture the panic thrown by `JSONStringify`:
+	//
+	// defer func() {
+	// 	if r := recover(); r != nil {
+	// 		fmt.Printf("Caught a panic: %v\n", r)
+	// 	}
+	// }()
+
 	global := v8.NewObjectTemplate(iso)
 	err := global.Set("foobar", v8.NewFunctionTemplate(iso, func(info *v8.FunctionCallbackInfo) *v8.Value {
 		v8v, _ := v8.NewValue(iso, "callback")
