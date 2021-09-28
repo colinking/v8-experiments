@@ -30,6 +30,19 @@ var code = `
 // 	}))
 // `
 
+// It also is not an issue with function closures, since the following also
+// runs fine:
+//
+// var code = `
+// 	const foo = {
+// 		get: function () {
+// 			foobar()
+// 			return "hello!"
+// 		}
+// 	};
+// 	foo
+// `
+
 func main() {
 	iso := v8.NewIsolate()
 	defer iso.Dispose()
