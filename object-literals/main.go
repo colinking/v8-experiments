@@ -9,6 +9,15 @@ import (
 	v8 "github.com/airplanedev/v8go"
 )
 
+// This example fails with:
+//
+//   panic: running script: SyntaxError: Unexpected token ':'
+//
+//   goroutine 1 [running]:
+//   main.main()
+//   	/Users/colin/dev/colinking/v8-experiments/object-literals/main.go:27 +0x264
+//   exit status 2
+//
 var code = `
 	{
 		"foo": "bar"
