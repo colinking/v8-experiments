@@ -24,6 +24,10 @@ var code = `
 	}
 `
 
+// This will return an `undefined` value, rather than an empty object literal:
+//
+// var code = `{}`
+
 func main() {
 	iso := v8.NewIsolate()
 	defer iso.Dispose()
